@@ -30,6 +30,13 @@ jobs:
           pip install --upgrade pip
           pip install buildozer cython
 
+      - name: Auto-Accept Android SDK Licenses
+        run: |
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+          # Automatically send 'y' to accept all SDK and NDK licenses
+          yes | buildozer android debug || true
+
       - name: Build APK with Buildozer
         run: |
           buildozer android debug
